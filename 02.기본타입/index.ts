@@ -32,3 +32,16 @@ AnyTypeMember = [];
 let UnknownTypeName: unknown;
 UnknownTypeName = 123;
 UnknownTypeName = {};
+
+let school : {
+    score : (number|boolean)[],
+    teacher : string,
+    friend : string | string[]
+}
+= {
+    score : [100, 97, 84],
+    teacher : 'Phil',
+    friend : 'John'
+}
+school.score[4] = false;
+school.friend = ['Lee', school.teacher];
