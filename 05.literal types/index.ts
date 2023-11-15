@@ -33,3 +33,26 @@ const myFunc = (a: 'kim') => {
 }
 // 솔루션2. as문법으로 타입 지정
 myFunc(data.name);
+
+
+// type alias에 함수 type 저장해서 쓰는 법
+type Func8Type = (a: string) => number;
+const func8: Func8Type = (a) => {
+  return 10;
+}
+
+type MemberInfoType = {
+  name : string,
+  age : number,
+  plusOne : ( x :number ) => number,
+  changeName : () => void
+}
+let memberInfo: MemberInfoType = {
+  name: 'kim',
+  age: 18,
+  plusOne(a: number) {
+    return a + 1;
+  },
+  changeName: () => { }
+}
+memberInfo.plusOne(10);
