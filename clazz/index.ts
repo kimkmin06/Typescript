@@ -26,7 +26,12 @@ function add2(num1: number, num2: number): number {
 }
 const plus = (num1: number, num2: number): number => num1 + num2;
 
-const arr: [number] = 1;
-arr.push(2);
-console.log(arr);
-console.log
+const arr: readonly [number, string] = [1, 'user1']; //push를 막는 튜플
+//arr.push(1); //error
+
+//가변 길이 튜플
+const arr2: [number, ...string[]] = [1, 'user1'];
+arr2.push('user2');
+arr2.push('user3');
+console.log(arr2[2]);
+console.log(arr2[3]);
