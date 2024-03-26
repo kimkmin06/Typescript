@@ -55,3 +55,25 @@ class Point{
 }
 const p1: Point = new Point();
 const p2: Point = new Point(0, 0);
+
+class Parent{
+  id = 0;
+}
+class Child extends Parent {
+  value: number;
+  constructor(value: number = 0) {
+    super();
+    this.value = value;
+  }
+}
+// 멤버 함수에서 멤버 속성을 사용할 때 this를 붙여야 함
+const value = 'Hello';
+class Button {
+  value = 'world';
+  say() {
+    console.log(value);
+    console.log(this.value);
+  }
+}
+const b = new Button();
+b.say();
