@@ -35,3 +35,23 @@ arr2.push('user2');
 arr2.push('user3');
 console.log(arr2[2]);
 console.log(arr2[3]);
+
+
+//function test(num: number):void; //선언부만 외부에서 보임
+//function test(): void; //구현부는 외부에서 알 수 없음
+//구현부 함수는 호출할 수 없음
+//test(1); //error
+// 선언부 함수를 통해서만 호출 가능
+//test();
+
+//클래스 멤버
+class Point{
+  x: number;
+  y: number;
+  constructor(x: number=0, y: number=0){
+    this.x = x;
+    this.y = y;
+  } 
+}
+const p1: Point = new Point();
+const p2: Point = new Point(0, 0);
