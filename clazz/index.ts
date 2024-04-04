@@ -1,79 +1,65 @@
-console.log('Hello');
+import inquirer from 'inquirer';
 
-//변수 선언: 변수의 이름 뒤에 :타입 형태로 표시
-let myName: string = "Alice";
 
-//매개변수: 매개변수 이름 뒤에 타입 작성
-function greet(name: string) {
-  console.log("Hello, " + name.toUpperCase() + "!!");
+// number 타입의 아이디와 string 타입의 title을 가진 객체를 저장하도록
+// Todo 타입을 선언한다.
+
+// any[] 타입이 되지 않도록 수정
+const todoList = [];
+let id = 0;
+
+// 할 일 추가: 추가된 항목을 반환.
+function addTodo(todo) {
 }
 
-//반환 타입: 매개변수 목록 뒤에 표시
-function getFavoriteNumber(): number {
-  return 26;
+// 할 일 목록 출력
+function getTodoList(){
 }
 
-function add(number1: number, number2: number): number {
-  return number1 + number2;
+// 배열 가장 앞의 항목을 삭제
+// 삭제한 항목을 반환
+function deleteTodo(){
 }
 
-//원시타입 - Primitive Types
-const msg: string = "Hello, World!";
-const num: number = 123;
-const bool: boolean = true;
-function add2(num1: number, num2: number): number {
-  return num1 + num2;
-}
-const plus = (num1: number, num2: number): number => num1 + num2;
-
-const arr: readonly [number, string] = [1, 'user1']; //push를 막는 튜플
-//arr.push(1); //error
-
-//가변 길이 튜플
-const arr2: [number, ...string[]] = [1, 'user1'];
-arr2.push('user2');
-arr2.push('user3');
-console.log(arr2[2]);
-console.log(arr2[3]);
-
-
-//function test(num: number):void; //선언부만 외부에서 보임
-//function test(): void; //구현부는 외부에서 알 수 없음
-//구현부 함수는 호출할 수 없음
-//test(1); //error
-// 선언부 함수를 통해서만 호출 가능
-//test();
-
-//클래스 멤버
-class Point{
-  x: number;
-  y: number;
-  constructor(x: number=0, y: number=0){
-    this.x = x;
-    this.y = y;
-  } 
-}
-const p1: Point = new Point();
-const p2: Point = new Point(0, 0);
-
-class Parent{
-  id = 0;
-}
-class Child extends Parent {
-  value: number;
-  constructor(value: number = 0) {
-    super();
-    this.value = value;
+function doOperation(operation:string){
+  switch(operation){
+    case '할 일 조회': return getTodoList();
+    case '할 일 추가':
+      // 위에서 정의한 타입에 맞는 객체 생성
+      const todo = {};
+      return addTodo(todo);
+    case '할 일 삭제': 
+      return deleteTodo();
   }
 }
-// 멤버 함수에서 멤버 속성을 사용할 때 this를 붙여야 함
-const value = 'Hello';
-class Button {
-  value = 'world';
-  say() {
-    console.log(value);
-    console.log(this.value);
+
+const  getOperation  = ():Promise<string> => {
+  return new Promise<string>(
+    (resolve:(value:string)=>void, reject:(err:any)=>void)=>{
+      inquirer
+        .prompt([
+          {
+            type: 'list',
+            name: 'operation',
+            message: '원하는 동작을 선택하세요.',
+            default: '할 일 조회',
+            choices:['할 일 조회', '할 일 추가', '할 일 삭제', '나가기']
+          },
+        ])
+        .then(answers => {
+          resolve(answers.operation);
+        });
+    }
+  );
+}
+
+async function run(){
+  let operation = '';
+  while(operation!='나가기'){
+    operation = await getOperation();
+    const result = doOperation(operation);
+    console.log(result);
   }
 }
-const b = new Button();
-b.say();
+
+run();
